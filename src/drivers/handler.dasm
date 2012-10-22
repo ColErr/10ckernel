@@ -1,0 +1,19 @@
+
+init_devices:
+    HWN I
+    
+    .next:
+    IFE I, 0
+        SET PC, POP
+    SUB PC, 1
+    
+    HWQ I
+    
+    ;Generic Clock
+    IFE B, 0x12D0
+        IFE A, 0xB402
+            SET PC, Clock_SetID
+    
+    SET PC, .next
+
+#include <drv_clock.dasm>

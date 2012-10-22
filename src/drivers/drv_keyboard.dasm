@@ -1,0 +1,14 @@
+; --------------------------------------------
+; Title:   keyboard
+; Author:  Canino
+; Date:    7/10/2012
+; Version: 
+; --------------------------------------------
+;***********************WILL NEED TO BE RELOCATABLE
+
+SUB PC, 1
+
+#define KEY_CLRBUFF		0
+#define KEY_NEXTKEY		1
+#define KEY_KEYPRSS		2
+#define KEY_TOGLINT		3

@@ -1,0 +1,4 @@
+
+JSR init_devices
+
+#include <handler.dasm>

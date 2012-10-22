@@ -1,0 +1,44 @@
+../src/main.dasm              (line 2):  [0x0000] 7C20 0002       JSR init_devices
+../src/drivers\handler.dasm   (line 3):  [0x0002]               init_devices:
+../src/drivers\handler.dasm   (line 4):  [0x0002] 1A00            HWN I
+../src/drivers\handler.dasm   (line 6):  [0x0003]               .next:
+../src/drivers\handler.dasm   (line 7):  [0x0003] 84D2            IFE I, 0
+../src/drivers\handler.dasm   (line 8):  [0x0004] 6381            SET PC, POP
+../src/drivers\handler.dasm   (line 9):  [0x0005] 8B83            SUB PC, 1
+../src/drivers\handler.dasm   (line 11): [0x0006] 1A20            HWQ I
+../src/drivers\handler.dasm   (line 14): [0x0007] 7C32 12D0       IFE B, 0x12D0
+../src/drivers\handler.dasm   (line 15): [0x0009] 7C12 B402       IFE A, 0xB402
+../src/drivers\handler.dasm   (line 16): [0x000B] C381            SET PC, Clock_SetID
+../src/drivers\handler.dasm   (line 18): [0x000C] 9381            SET PC, .next
+../src/drivers\drv_clock.dasm (line 10): [0x000F]               Clock_SetID:
+../src/drivers\drv_clock.dasm (line 11): [0x000F] 03C1 0027       SET [Clock_ID], A
+../src/drivers\drv_clock.dasm (line 12): [0x0011] 6381            SET PC, POP
+../src/drivers\drv_clock.dasm (line 15): [0x0012]               Clock_SetTick:
+../src/drivers\drv_clock.dasm (line 16): [0x0012] 0701            SET PUSH, B
+../src/drivers\drv_clock.dasm (line 17): [0x0012] 0021            SET B, A
+../src/drivers\drv_clock.dasm (line 18): [0x0013] 8401            SET A, CLOCK_SETTICK
+../src/drivers\drv_clock.dasm (line 19): [0x0013] 7A40 0027       HWI [Clock_ID]
+../src/drivers\drv_clock.dasm (line 20): [0x0015] 0401            SET A, B
+../src/drivers\drv_clock.dasm (line 21): [0x0016] 6021            SET B, POP
+../src/drivers\drv_clock.dasm (line 22): [0x0017] 6381            SET PC, POP
+../src/drivers\drv_clock.dasm (line 25): [0x0018]               Clock_GetTick:
+../src/drivers\drv_clock.dasm (line 26): [0x0018] 0B01            SET PUSH, C
+../src/drivers\drv_clock.dasm (line 27): [0x0019] 8801            SET A, CLOCK_GETTICK
+../src/drivers\drv_clock.dasm (line 28): [0x001A] 7A40 0027       HWI [Clock_ID]
+../src/drivers\drv_clock.dasm (line 29): [0x001C] 0801            SET A, C
+../src/drivers\drv_clock.dasm (line 30): [0x001D] 6041            SET C, POP
+../src/drivers\drv_clock.dasm (line 31): [0x001E] 6381            SET PC, POP
+../src/drivers\drv_clock.dasm (line 34): [0x001F]               Clock_SetIntMsg:
+../src/drivers\drv_clock.dasm (line 35): [0x001F] 0701            SET PUSH, B
+../src/drivers\drv_clock.dasm (line 36): [0x0020] 0021            SET B, A
+../src/drivers\drv_clock.dasm (line 37): [0x0021] 8C01            SET A, CLOCK_TOGLINT
+../src/drivers\drv_clock.dasm (line 38): [0x0022] 7A40 0027       HWI [Clock_ID]
+../src/drivers\drv_clock.dasm (line 39): [0x0024] 0401            SET A, B
+../src/drivers\drv_clock.dasm (line 40): [0x0025] 6021            SET B, POP
+../src/drivers\drv_clock.dasm (line 41): [0x0026] 6381            SET PC, POP
+../src/drivers\drv_clock.dasm (line 43): [0x0027]               Clock_ID:
+../src/drivers\drv_clock.dasm (line 44): [0x0027]                 .DAT 0xFFFF
+../src/drivers\drv_clock.dasm (line 44): [0x0027]                      FFFF
+../src/drivers\drv_clock.dasm (line 46): [0x0028]               #define CLOCK_SETTICK 0
+../src/drivers\drv_clock.dasm (line 47): [0x0028]               #define CLOCK_GETTICK 1
+../src/drivers\drv_clock.dasm (line 48): [0x0028]               #define CLOCK_TOGLINT 2
