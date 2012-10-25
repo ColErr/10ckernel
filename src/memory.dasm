@@ -1,0 +1,153 @@
+
+#define MEM_ERR_INSFRAM     128
+#define MEM_ERR_NOBLOCK     129
+
+init_memory:
+    SET A, free_memory_start
+    DIV A, 0x200
+    IFN EX, 0
+        ADD A, 1
+    
+    SET PC, POP
+    
+;Takes pages required (A), returns starting page number (A)
+;Do a SHL, 9 to get starting address
+;Values over 127 are errors.
+;128 = RAM full
+;129 = Not enough RAM
+;130 = No contiguous space for request
+;131 = Request too large
+malloc:
+    IFG A, 64
+        .err131:
+    SET B, 0
+    SET C, 1
+    SET Z, 12
+    
+    IFG A, C
+        ADD PC, 2
+            SET PC, .find
+    ADD B, 1
+    SHL C, 1
+    SUB PC, 7
+    
+    .find:
+    SET I, memory_block
+    SET X, [I]
+    SHR X, Z
+    AND X, 0xF
+    IFG X, 7
+        SET PC, .next
+    IFG A, X
+        SET PC, .next
+    IFL A, X
+        SET PC, .split
+    SET PC, .found
+    
+    .found:
+    BOR B, 0x8
+    SHL B, Z
+    SET [I], B
+    SET B, 12
+    SUB B, Z
+    SUB I, memory_block
+    MUL I, 0x800
+    MUL B, 0x200
+    ADD I, B
+    SET A, I
+    
+    SET PC, POP
+
+;Takes page number (A)
+free:
+    
+
+;Starting address (A), Words (B)
+clear_mem:
+    SET PUSH, I
+    SET PUSH, J
+    
+    SET I, A
+    SET A, B
+    DIV A, 0x10
+    
+    IFE A, 0
+        ADD PC, 18
+    STI [I], 0
+    STI [I], 0
+    STI [I], 0
+    STI [I], 0 ;4
+    STI [I], 0
+    STI [I], 0
+    STI [I], 0
+    STI [I], 0 ;8
+    STI [I], 0
+    STI [I], 0
+    STI [I], 0
+    STI [I], 0 ;12
+    STI [I], 0
+    STI [I], 0
+    STI [I], 0
+    STI [I], 0 ;16
+    SUB A, 1
+    SUB PC, 20
+    
+    MOD B, 0x10
+    IFE B, 0
+        ADD PC, 3
+    STI [I], 0
+    SUB B, 1
+    SUB PC, 5
+    
+    SET J, POP
+    SET I, POP
+    SET PC, POP
+
+;From address (A), To address (B), Words (C)
+copy_mem:
+    SET PUSH, I
+    SET PUSH, J
+    
+    SET I, A
+    SET J, B
+    SET A, C
+    DIV A, 0x10
+    
+    IFE A, 0
+        ADD PC, 18
+    STI [I], J
+    STI [I], J
+    STI [I], J
+    STI [I], J ;4
+    STI [I], J
+    STI [I], J
+    STI [I], J
+    STI [I], J ;8
+    STI [I], J
+    STI [I], J
+    STI [I], J
+    STI [I], J ;12
+    STI [I], J
+    STI [I], J
+    STI [I], J
+    STI [I], J ;16
+    SUB A, 1
+    SUB PC, 20
+    
+    MOD C, 0x10
+    IFE C, 0
+        ADD PC, 3
+    STI [I], 0
+    SUB C, 1
+    SUB PC, 5
+    
+    SET J, POP
+    SET I, POP
+    SET PC, POP
+
+memory_block:
+DAT 0x7000
+#reserve 15
+DAT 0x7000
+#reserve 15
+memory_pool_end:

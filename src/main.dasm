@@ -1,4 +1,8 @@
 
+JSR init_memory
 JSR init_devices
 
 #include <handler.dasm>
+#include "memory.dasm"
+
+free_memory_start:

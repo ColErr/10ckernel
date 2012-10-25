@@ -1,44 +1,135 @@
-../src/main.dasm              (line 2):  [0x0000] 7C20 0002       JSR init_devices
-../src/drivers\handler.dasm   (line 3):  [0x0002]               init_devices:
-../src/drivers\handler.dasm   (line 4):  [0x0002] 1A00            HWN I
-../src/drivers\handler.dasm   (line 6):  [0x0003]               .next:
-../src/drivers\handler.dasm   (line 7):  [0x0003] 84D2            IFE I, 0
-../src/drivers\handler.dasm   (line 8):  [0x0004] 6381            SET PC, POP
-../src/drivers\handler.dasm   (line 9):  [0x0005] 8B83            SUB PC, 1
-../src/drivers\handler.dasm   (line 11): [0x0006] 1A20            HWQ I
-../src/drivers\handler.dasm   (line 14): [0x0007] 7C32 12D0       IFE B, 0x12D0
-../src/drivers\handler.dasm   (line 15): [0x0009] 7C12 B402       IFE A, 0xB402
-../src/drivers\handler.dasm   (line 16): [0x000B] C381            SET PC, Clock_SetID
-../src/drivers\handler.dasm   (line 18): [0x000C] 9381            SET PC, .next
-../src/drivers\drv_clock.dasm (line 10): [0x000F]               Clock_SetID:
-../src/drivers\drv_clock.dasm (line 11): [0x000F] 03C1 0027       SET [Clock_ID], A
-../src/drivers\drv_clock.dasm (line 12): [0x0011] 6381            SET PC, POP
-../src/drivers\drv_clock.dasm (line 15): [0x0012]               Clock_SetTick:
-../src/drivers\drv_clock.dasm (line 16): [0x0012] 0701            SET PUSH, B
-../src/drivers\drv_clock.dasm (line 17): [0x0012] 0021            SET B, A
-../src/drivers\drv_clock.dasm (line 18): [0x0013] 8401            SET A, CLOCK_SETTICK
-../src/drivers\drv_clock.dasm (line 19): [0x0013] 7A40 0027       HWI [Clock_ID]
-../src/drivers\drv_clock.dasm (line 20): [0x0015] 0401            SET A, B
-../src/drivers\drv_clock.dasm (line 21): [0x0016] 6021            SET B, POP
-../src/drivers\drv_clock.dasm (line 22): [0x0017] 6381            SET PC, POP
-../src/drivers\drv_clock.dasm (line 25): [0x0018]               Clock_GetTick:
-../src/drivers\drv_clock.dasm (line 26): [0x0018] 0B01            SET PUSH, C
-../src/drivers\drv_clock.dasm (line 27): [0x0019] 8801            SET A, CLOCK_GETTICK
-../src/drivers\drv_clock.dasm (line 28): [0x001A] 7A40 0027       HWI [Clock_ID]
-../src/drivers\drv_clock.dasm (line 29): [0x001C] 0801            SET A, C
-../src/drivers\drv_clock.dasm (line 30): [0x001D] 6041            SET C, POP
-../src/drivers\drv_clock.dasm (line 31): [0x001E] 6381            SET PC, POP
-../src/drivers\drv_clock.dasm (line 34): [0x001F]               Clock_SetIntMsg:
-../src/drivers\drv_clock.dasm (line 35): [0x001F] 0701            SET PUSH, B
-../src/drivers\drv_clock.dasm (line 36): [0x0020] 0021            SET B, A
-../src/drivers\drv_clock.dasm (line 37): [0x0021] 8C01            SET A, CLOCK_TOGLINT
-../src/drivers\drv_clock.dasm (line 38): [0x0022] 7A40 0027       HWI [Clock_ID]
-../src/drivers\drv_clock.dasm (line 39): [0x0024] 0401            SET A, B
-../src/drivers\drv_clock.dasm (line 40): [0x0025] 6021            SET B, POP
-../src/drivers\drv_clock.dasm (line 41): [0x0026] 6381            SET PC, POP
-../src/drivers\drv_clock.dasm (line 43): [0x0027]               Clock_ID:
-../src/drivers\drv_clock.dasm (line 44): [0x0027]                 .DAT 0xFFFF
-../src/drivers\drv_clock.dasm (line 44): [0x0027]                      FFFF
-../src/drivers\drv_clock.dasm (line 46): [0x0028]               #define CLOCK_SETTICK 0
-../src/drivers\drv_clock.dasm (line 47): [0x0028]               #define CLOCK_GETTICK 1
-../src/drivers\drv_clock.dasm (line 48): [0x0028]               #define CLOCK_TOGLINT 2
+../src/main.dasm              (line 2):   [0x0000] 7C20 0031       JSR init_memory
+../src/main.dasm              (line 3):   [0x0002] 7C20 0004       JSR init_devices
+../src/drivers\handler.dasm   (line 3):   [0x0004]               init_devices:
+../src/drivers\handler.dasm   (line 4):   [0x0004] 1A00            HWN I
+../src/drivers\handler.dasm   (line 6):   [0x0005]               .next:
+../src/drivers\handler.dasm   (line 7):   [0x0005] 7CD2 0000       IFE I, 0
+../src/drivers\handler.dasm   (line 8):   [0x0007] 6381            SET PC, POP
+../src/drivers\handler.dasm   (line 9):   [0x0008] 7F83 0001       SUB PC, 1
+../src/drivers\handler.dasm   (line 11):  [0x000A] 1A20            HWQ I
+../src/drivers\handler.dasm   (line 14):  [0x000B] 7C32 12D0       IFE B, 0x12D0
+../src/drivers\handler.dasm   (line 15):  [0x000D] 7C12 B402       IFE A, 0xB402
+../src/drivers\handler.dasm   (line 16):  [0x000F] 7F81 0013       SET PC, Clock_SetID
+../src/drivers\handler.dasm   (line 18):  [0x0011] 7F81 0005       SET PC, .next
+../src/drivers\drv_clock.dasm (line 10):  [0x0013]               Clock_SetID:
+../src/drivers\drv_clock.dasm (line 11):  [0x0013] 03C1 0030       SET [Clock_ID], A
+../src/drivers\drv_clock.dasm (line 12):  [0x0015] 6381            SET PC, POP
+../src/drivers\drv_clock.dasm (line 15):  [0x0016]               Clock_SetTick:
+../src/drivers\drv_clock.dasm (line 16):  [0x0016] 0701            SET PUSH, B
+../src/drivers\drv_clock.dasm (line 17):  [0x0017] 0021            SET B, A
+../src/drivers\drv_clock.dasm (line 18):  [0x0018] 7C01 0000       SET A, CLOCK_SETTICK
+../src/drivers\drv_clock.dasm (line 19):  [0x001A] 7A40 0030       HWI [Clock_ID]
+../src/drivers\drv_clock.dasm (line 20):  [0x001C] 0401            SET A, B
+../src/drivers\drv_clock.dasm (line 21):  [0x001D] 6021            SET B, POP
+../src/drivers\drv_clock.dasm (line 22):  [0x001E] 6381            SET PC, POP
+../src/drivers\drv_clock.dasm (line 25):  [0x001F]               Clock_GetTick:
+../src/drivers\drv_clock.dasm (line 26):  [0x001F] 0B01            SET PUSH, C
+../src/drivers\drv_clock.dasm (line 27):  [0x0020] 7C01 0001       SET A, CLOCK_GETTICK
+../src/drivers\drv_clock.dasm (line 28):  [0x0022] 7A40 0030       HWI [Clock_ID]
+../src/drivers\drv_clock.dasm (line 29):  [0x0024] 0801            SET A, C
+../src/drivers\drv_clock.dasm (line 30):  [0x0025] 6041            SET C, POP
+../src/drivers\drv_clock.dasm (line 31):  [0x0026] 6381            SET PC, POP
+../src/drivers\drv_clock.dasm (line 34):  [0x0027]               Clock_SetIntMsg:
+../src/drivers\drv_clock.dasm (line 35):  [0x0027] 0701            SET PUSH, B
+../src/drivers\drv_clock.dasm (line 36):  [0x0028] 0021            SET B, A
+../src/drivers\drv_clock.dasm (line 37):  [0x0029] 7C01 0002       SET A, CLOCK_TOGLINT
+../src/drivers\drv_clock.dasm (line 38):  [0x002B] 7A40 0030       HWI [Clock_ID]
+../src/drivers\drv_clock.dasm (line 39):  [0x002D] 0401            SET A, B
+../src/drivers\drv_clock.dasm (line 40):  [0x002E] 6021            SET B, POP
+../src/drivers\drv_clock.dasm (line 41):  [0x002F] 6381            SET PC, POP
+../src/drivers\drv_clock.dasm (line 43):  [0x0030]               Clock_ID:
+../src/drivers\drv_clock.dasm (line 44):  [0x0030]                 .DAT 0xFFFF
+../src/drivers\drv_clock.dasm (line 44):  [0x0030]                      FFFF
+../src/drivers\drv_clock.dasm (line 46):  [0x0031]               #define CLOCK_SETTICK 0
+../src/drivers\drv_clock.dasm (line 47):  [0x0031]               #define CLOCK_GETTICK 1
+../src/drivers\drv_clock.dasm (line 48):  [0x0031]               #define CLOCK_TOGLINT 2
+memory.dasm                   (line 3):   [0x0031]               #define MEM_ERR_INSFRAM 128
+memory.dasm                   (line 4):   [0x0031]               #define MEM_ERR_NOBLOCK 129
+memory.dasm                   (line 6):   [0x0031]               init_memory:
+memory.dasm                   (line 7):   [0x0031] 7C01 00B6       SET A, free_memory_start
+memory.dasm                   (line 8):   [0x0033] 7C06 0200       DIV A, 0x200
+memory.dasm                   (line 9):   [0x0035] 7FB3 0000       IFN EX, 0
+memory.dasm                   (line 10):  [0x0037] 7C02 0001       ADD A, 1
+memory.dasm                   (line 11):  [0x0039] 7C21 0010       SET B, 16
+memory.dasm                   (line 12):  [0x003B] 0023            SUB B, A
+memory.dasm                   (line 13):  [0x003C] 7C01 FFFF       SET A, -1
+memory.dasm                   (line 14):  [0x003E] 040D            SHR A, B
+memory.dasm                   (line 15):  [0x003F] 040F            SHL A, B
+memory.dasm                   (line 16):  [0x0040] 03C1 00AE       SET [memory_pages], A
+memory.dasm                   (line 17):  [0x0042] 6381            SET PC, POP
+memory.dasm                   (line 24):  [0x0043]               malloc:
+memory.dasm                   (line 28):  [0x0043]               free:
+memory.dasm                   (line 32):  [0x0043]               clear_mem:
+memory.dasm                   (line 33):  [0x0043] 1B01            SET PUSH, I
+memory.dasm                   (line 34):  [0x0044] 1F01            SET PUSH, J
+memory.dasm                   (line 36):  [0x0045] 00C1            SET I, A
+memory.dasm                   (line 37):  [0x0046] 0401            SET A, B
+memory.dasm                   (line 38):  [0x0047] 7C06 000F       DIV A, 0xF
+memory.dasm                   (line 40):  [0x0049] 7C12 0000       IFE A, 0
+memory.dasm                   (line 41):  [0x004B] 7F82 0012       ADD PC, 18
+memory.dasm                   (line 42):  [0x004D] 7DDE 0000       STI [I], 0
+memory.dasm                   (line 43):  [0x004F] 7DDE 0000       STI [I], 0
+memory.dasm                   (line 44):  [0x0051] 7DDE 0000       STI [I], 0
+memory.dasm                   (line 45):  [0x0053] 7DDE 0000       STI [I], 0
+memory.dasm                   (line 46):  [0x0055] 7DDE 0000       STI [I], 0
+memory.dasm                   (line 47):  [0x0057] 7DDE 0000       STI [I], 0
+memory.dasm                   (line 48):  [0x0059] 7DDE 0000       STI [I], 0
+memory.dasm                   (line 49):  [0x005B] 7DDE 0000       STI [I], 0
+memory.dasm                   (line 50):  [0x005D] 7DDE 0000       STI [I], 0
+memory.dasm                   (line 51):  [0x005F] 7DDE 0000       STI [I], 0
+memory.dasm                   (line 52):  [0x0061] 7DDE 0000       STI [I], 0
+memory.dasm                   (line 53):  [0x0063] 7DDE 0000       STI [I], 0
+memory.dasm                   (line 54):  [0x0065] 7DDE 0000       STI [I], 0
+memory.dasm                   (line 55):  [0x0067] 7DDE 0000       STI [I], 0
+memory.dasm                   (line 56):  [0x0069] 7DDE 0000       STI [I], 0
+memory.dasm                   (line 57):  [0x006B] 7DDE 0000       STI [I], 0
+memory.dasm                   (line 58):  [0x006D] 7C03 0001       SUB A, 1
+memory.dasm                   (line 59):  [0x006F] 7F83 0014       SUB PC, 20
+memory.dasm                   (line 61):  [0x0071] 7C28 000F       MOD B, 0xF
+memory.dasm                   (line 62):  [0x0073] 7C32 0000       IFE B, 0
+memory.dasm                   (line 63):  [0x0075] 7F82 0003       ADD PC, 3
+memory.dasm                   (line 64):  [0x0077] 7DDE 0000       STI [I], 0
+memory.dasm                   (line 65):  [0x0079] 7C23 0001       SUB B, 1
+memory.dasm                   (line 66):  [0x007B] 7F83 0005       SUB PC, 5
+memory.dasm                   (line 68):  [0x007D] 60E1            SET J, POP
+memory.dasm                   (line 69):  [0x007E] 60C1            SET I, POP
+memory.dasm                   (line 70):  [0x007F] 6381            SET PC, POP
+memory.dasm                   (line 73):  [0x0080]               copy_mem:
+memory.dasm                   (line 74):  [0x0080] 1B01            SET PUSH, I
+memory.dasm                   (line 75):  [0x0081] 1F01            SET PUSH, J
+memory.dasm                   (line 77):  [0x0082] 00C1            SET I, A
+memory.dasm                   (line 78):  [0x0083] 04E1            SET J, B
+memory.dasm                   (line 79):  [0x0084] 0801            SET A, C
+memory.dasm                   (line 80):  [0x0085] 7C06 000F       DIV A, 0xF
+memory.dasm                   (line 82):  [0x0087] 7C12 0000       IFE A, 0
+memory.dasm                   (line 83):  [0x0089] 7F82 0012       ADD PC, 18
+memory.dasm                   (line 84):  [0x008B] 1DDE            STI [I], J
+memory.dasm                   (line 85):  [0x008C] 1DDE            STI [I], J
+memory.dasm                   (line 86):  [0x008D] 1DDE            STI [I], J
+memory.dasm                   (line 87):  [0x008E] 1DDE            STI [I], J
+memory.dasm                   (line 88):  [0x008F] 1DDE            STI [I], J
+memory.dasm                   (line 89):  [0x0090] 1DDE            STI [I], J
+memory.dasm                   (line 90):  [0x0091] 1DDE            STI [I], J
+memory.dasm                   (line 91):  [0x0092] 1DDE            STI [I], J
+memory.dasm                   (line 92):  [0x0093] 1DDE            STI [I], J
+memory.dasm                   (line 93):  [0x0094] 1DDE            STI [I], J
+memory.dasm                   (line 94):  [0x0095] 1DDE            STI [I], J
+memory.dasm                   (line 95):  [0x0096] 1DDE            STI [I], J
+memory.dasm                   (line 96):  [0x0097] 1DDE            STI [I], J
+memory.dasm                   (line 97):  [0x0098] 1DDE            STI [I], J
+memory.dasm                   (line 98):  [0x0099] 1DDE            STI [I], J
+memory.dasm                   (line 99):  [0x009A] 1DDE            STI [I], J
+memory.dasm                   (line 100): [0x009B] 7C03 0001       SUB A, 1
+memory.dasm                   (line 101): [0x009D] 7F83 0014       SUB PC, 20
+memory.dasm                   (line 103): [0x009F] 7C48 000F       MOD C, 0xF
+memory.dasm                   (line 104): [0x00A1] 7C52 0000       IFE C, 0
+memory.dasm                   (line 105): [0x00A3] 7F82 0003       ADD PC, 3
+memory.dasm                   (line 106): [0x00A5] 7DDE 0000       STI [I], 0
+memory.dasm                   (line 107): [0x00A7] 7C43 0001       SUB C, 1
+memory.dasm                   (line 108): [0x00A9] 7F83 0005       SUB PC, 5
+memory.dasm                   (line 110): [0x00AB] 60E1            SET J, POP
+memory.dasm                   (line 111): [0x00AC] 60C1            SET I, POP
+memory.dasm                   (line 112): [0x00AD] 6381            SET PC, POP
+memory.dasm                   (line 114): [0x00AE]               memory_pages:
+memory.dasm                   (line 115): [0x00AE] 0000 0000 0000 0000 0000 0000 0000 0000#reserve 8
+../src/main.dasm              (line 8):   [0x00B6]               free_memory_start:
