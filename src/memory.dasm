@@ -18,7 +18,7 @@ init_memory:
 ;130 = No contiguous space for request
 ;131 = Request too large
 malloc:
-    IFG A, 64
+    IFG A, 128
         SET PC, .err131:
     SET B, 0
     SET C, 1
@@ -54,30 +54,62 @@ malloc:
     IFG Z, -1
         SET PC, .find
     SET X, 2
+    SET Z, 12
     .nextword:
     SET C, 1
     SUB X, 2
     SHL C, X
     ADD I, C
     IFL I, memory_pool
-        SET PC, .next
+        SET PC, .find
     SET PC, .err128
     
+    .split:
+    SET C, 1
+    SHL C, Z
+    SUB [I], C
+    SUB X, 1
+    SET B, X
+    IFG X, 1
+        SET PC, .newword
+    ADD B, 1
+    MUL B, 4
+    SUB Z, B
+    IFG Z, -1
+        SET PC, .adjust
+    SET B, 2
+    SET Z, 12
+    .newword:
+    SET C, 1
+    SUB B, 2
+    SHL C, B
+    ADD C, I
+    .adjust:
+    SHL X, Z
+    BOR [C], X
+    SET PC, .find
+    
     .found:
-    BOR B, 0x8
-    SHL B, Z
-    SET [I], B
-    SET B, 12
-    SUB B, Z
+    AND A, 0x8
+    SHL A, Z
+    BOR [I], A
+    SET A, 12
+    SUB A, Z
     SUB I, memory_pool
     MUL I, 0x800
-    MUL B, 0x200
-    ADD I, B
-    SET A, I
+    MUL A, 0x200
+    ADD A, I
     
     SET PC, POP
+    
+    .err128:
+    SET A, 128
+    SET PC, POP
+    .err131:
+    SET A, 131
+    SET PC, POP
 
-;Takes page number (A)
+;Takes address (A)
 free:
     
 
