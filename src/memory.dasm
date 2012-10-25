@@ -19,10 +19,11 @@ init_memory:
 ;131 = Request too large
 malloc:
     IFG A, 64
-        .err131:
+        SET PC, .err131:
     SET B, 0
     SET C, 1
     SET Z, 12
+    SET I, memory_pool
     
     IFG A, C
         ADD PC, 2
@@ -32,7 +33,6 @@ malloc:
     SUB PC, 7
     
     .find:
-    SET I, memory_block
     SET X, [I]
     SHR X, Z
     AND X, 0xF
@@ -44,13 +44,32 @@ malloc:
         SET PC, .split
     SET PC, .found
     
+    .next
+    AND X, 0x7
+    IFG X, 1
+        SET PC, .nextword
+    ADD X, 1
+    MUL X, 4
+    SUB Z, X
+    IFG Z, -1
+        SET PC, .find
+    SET X, 2
+    .nextword:
+    SET C, 1
+    SUB X, 2
+    SHL C, X
+    ADD I, C
+    IFL I, memory_pool
+        SET PC, .next
+    SET PC, .err128
+    
     .found:
     BOR B, 0x8
     SHL B, Z
     SET [I], B
     SET B, 12
     SUB B, Z
-    SUB I, memory_block
+    SUB I, memory_pool
     MUL I, 0x800
     MUL B, 0x200
     ADD I, B
@@ -145,9 +164,7 @@ copy_mem:
     SET I, POP
     SET PC, POP
 
-memory_block:
+memory_pool:
 DAT 0x7000
-#reserve 15
-DAT 0x7000
-#reserve 15
+#reserve 31
 memory_pool_end:
