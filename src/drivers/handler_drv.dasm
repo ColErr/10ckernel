@@ -16,4 +16,4 @@ init_devices:
     
     SET PC, .next
 
-#include <drv_clock.dasm>
+#include "drivers/drv_clock.dasm"
