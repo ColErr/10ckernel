@@ -12,7 +12,7 @@ init_devices:
     ;Generic Clock
     IFE B, 0x12D0
         IFE A, 0xB402
-            SET PC, Clock_SetID
+            SET PC, clock_setID
     
     SET PC, .next
 
