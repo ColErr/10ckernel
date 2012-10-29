@@ -8,14 +8,14 @@
 
 ;Get Resolution
 ;returns cell width and height in X and Y
-Display_GetRes:
-	SET X, DIS_WIDTH
-	SET Y, DIS_HEIGHT
-	SET PC, POP
-	
+display_getRes:
+    SET X, LEM_WIDTH
+    SET Y, LEM_HEIGHT
+    SET PC, POP
+    
 ;Map screen to RAM
-Display_MapScrn:
-	
+display_mapScrn:
+    
 ;Map font
 ;Map Palette
 ;Set Border Color
@@ -23,13 +23,3 @@ Display_MapScrn:
 ;Get Palette
 
 SUB PC, 1
-
-#define DIS_MAPSCRN		0
-#define DIS_MAPFONT		1
-#define DIS_MAPPALT		2
-#define DIS_SETBORD		3
-#define DIS_DMPFONT		4
-#define DIS_DMPPALT		5
-
-#define DIS_WIDTH		32
-#define DIS_HEIGHT		12

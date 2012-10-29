@@ -1,4 +1,6 @@
 
+#include <static_vars.dasm>
+
 JSR init_memory
 JSR init_devices
 
