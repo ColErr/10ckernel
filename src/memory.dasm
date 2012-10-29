@@ -1,3 +1,6 @@
+;***************************
+;Memory management functions
+;***************************
 
 #define MEM_ERR_INSFRAM     128
 #define MEM_ERR_NOBLOCK     129
@@ -26,7 +29,8 @@ malloc:
     SET I, memory_pool
     
     IFG A, C
-        ADD PC, 2
+        ADD PC, 3
+            SET A, B
             SET PC, .find
     ADD B, 1
     SHL C, 1
@@ -44,7 +48,7 @@ malloc:
         SET PC, .split
     SET PC, .found
     
-    .next
+    .next:
     AND X, 0x7
     IFG X, 1
         SET PC, .nextword
