@@ -19,7 +19,7 @@ Clock_SetTick:
   SET A, B
   SET B, POP
   SET PC, POP
-	
+    
 ;Returns 1/60 sec elapsed since last call to Clock_SetTicks
 Clock_GetTick:
   SET PUSH, C
@@ -42,6 +42,6 @@ Clock_SetIntMsg:
 Clock_ID:
   DAT 0xFFFF
 
-#define CLOCK_SETTICK		0
-#define CLOCK_GETTICK		1
-#define CLOCK_TOGLINT		2
+#define CLOCK_SETTICK        0
+#define CLOCK_GETTICK        1
+#define CLOCK_TOGLINT        2
